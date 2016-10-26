@@ -6,7 +6,7 @@ public class Cajero implements Runnable {
 	private int tiempoMaximoPorCliente;
 	private int maximaEspera; // tiempo máximo que estaremos sin atender antes de cerrar caja.
 	private BlockingQueue q;
-	
+	private Cliente cliente;
 	
 	public Cajero(int id, int tiempoPorCliente, int maximaEspera, BlockingQueue q) {
 		super();
@@ -21,15 +21,16 @@ public class Cajero implements Runnable {
 		
 		
 		Random rand = new Random();
-		
-		
+				
 		try {
 		int tiempo_espera = Addition(rand.nextInt(1000), (rand.nextInt()*tiempoMaximoPorCliente));
+	//	System.out.println("CAJERO "+id+" ATENDIENDO CLIENTE "+this.cliente);
 		System.out.println("CAJERO "+id+" ATENDIENDO CLIENTE "+q.take());
-		//	q.put(tiempo_espera);
+		
+		//no se como sacarle la id del cliente  :(
 			
 		Thread.sleep(tiempo_espera);
-			System.out.println("CAJERO "+id+" FINALIZA CON CLIENTE Y. ATENDIDO EN T SEGUNDOS");
+		System.out.println("CAJERO "+id+" FINALIZA CON CLIENTE Y ATENDIDO EN T SEGUNDOS");
 			
 			
 		} catch (InterruptedException e) {
@@ -38,7 +39,6 @@ public class Cajero implements Runnable {
 		}
 		
 		// TODO: mientras hayan clientes...
-	
 		
 		
 	// sacamos un cliente de la cola, imprimimos "CAJERO X ATENDIENDO CLIENTE Y"
@@ -55,5 +55,4 @@ public class Cajero implements Runnable {
 		return resultado;		
 	}
 	
-
 }
